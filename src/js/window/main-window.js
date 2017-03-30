@@ -20,7 +20,7 @@ const Transport = require('./transport.js')
 const notifications = require('./notifications.js')
 const NotificationData = require('../../data/messages.json')
 const Guides = require('./guides.js')
-
+const Sonifier = require('./sonifier.js')
 
 let boardFilename
 let boardPath
@@ -448,6 +448,15 @@ let loadBoardUI = ()=> {
   guides = new Guides()
   guides.create(document.getElementById('guides'))
   guides.attachTo(document.getElementById('canvas-container'))
+
+
+
+  sketchPane.on('drawing:start', Sonifier.start)
+  sketchPane.on('drawing', Sonifier.trigger)
+  sketchPane.on('drawing:stop', Sonifier.stop)
+  Sonifier.init()
+
+
 
   let onUndoStackAction = (state) => {
     if (state.type == 'image') {
