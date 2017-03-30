@@ -222,6 +222,7 @@ let pointerDown = (e) => {
       window.requestAnimationFrame(drawMoveLoop)
     } else {
       if (e.shiftKey) isStraightline = true
+      module.exports.emit('drawing:start')
       window.requestAnimationFrame(drawBrushLoop)
     }
   }
@@ -230,6 +231,11 @@ let pointerDown = (e) => {
 let drawBrushLoop = (timestamp)=> {
   if (penDown) window.requestAnimationFrame(drawBrushLoop)
   //console.log(prevTimestamp-timestamp)
+
+  const curr = pointArray.slice(-1)[0]
+
+  module.exports.emit('drawing', pointAsDrawingEvent(curr))
+
   prevTimestamp = timestamp
   drawBrush()
 }
@@ -407,7 +413,9 @@ let pointerMove = (e) => {
   cursorDiv.style.left = (e.clientX-(cursorDiv.getBoundingClientRect().width/2)-sketchPaneDiv.getBoundingClientRect().left) + 'px'
   cursorDiv.style.top = (e.clientY-(cursorDiv.getBoundingClientRect().height/2)-sketchPaneDiv.getBoundingClientRect().top) + 'px'
   if (penDown) {
-    pointArray.push(getPointerData(e))
+    const curr = getPointerData(e)
+    pointArray.push(curr)
+    module.exports.emit('drawing', pointAsDrawingEvent(curr))
   }
 }
 
@@ -435,6 +443,8 @@ let pointerUp = (e) => {
     module.exports.emit('markDirty')
     module.exports.emit('lineMileage', Math.round(lineDistance))
     addToUndoStack()
+
+    module.exports.emit('drawing:stop')
   }
   penDown = false
 }
@@ -637,6 +647,24 @@ let addToUndoStack = (isBefore = false) => {
   ctx.drawImage(boardContext.canvas, 0, 0)
 
   module.exports.emit('addToUndoStack', isBefore, boardContext.canvas.id, ctx.canvas)
+}
+
+const pointAsDrawingEvent = (curr) => {
+  return {
+    x: curr.point[0],
+    y: curr.point[1],
+
+    pressure: curr.pressure,
+    tilt: curr.tilt,
+    angle: curr.angle,
+    eraser: curr.eraser,
+    pointerType: curr.pointerType,
+
+    w: boardContext.canvas.width,
+    h: boardContext.canvas.height,
+    
+    timestamp: Date.now()
+  }
 }
 
 module.exports.init = init
