@@ -660,8 +660,8 @@ const pointAsDrawingEvent = (curr) => {
     eraser: curr.eraser,
     pointerType: curr.pointerType,
 
-    w: boardContext.canvas.width,
-    h: boardContext.canvas.height,
+    sW: boardContext.canvas.width,
+    sH: boardContext.canvas.height,
     
     timestamp: Date.now()
   }
