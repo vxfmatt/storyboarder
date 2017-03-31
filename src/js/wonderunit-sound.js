@@ -12,11 +12,15 @@
   new chord sequences
 */
 
+const { remote } = require('electron')
+
 const Tone = require('tone')
 const { shuffle } = require('./utils/index.js')
 
 Tone.Transport.latencyHint = 'playback'
 Tone.Transport.start("+0.1")
+
+let enableInterfaceSounds = remote.getGlobal('sharedObj').prefs['enableInterfaceSounds']
 
 let chords = [
   ['a4', 'b4', 'c5', 'e5'],
@@ -139,6 +143,8 @@ let advanceNote = (amount) => {
 }
 
 let rollover = () => {
+  if (!enableInterfaceSounds) return
+
   let note = chords[currentChord][currentNote % (chords[0].length)]
   let bassnote = chords[currentChord][0]
   let onote = chords2[currentChord][currentNote % (chords[0].length)]
@@ -151,6 +157,8 @@ let rollover = () => {
 }
 
 let down = () => {
+  if (!enableInterfaceSounds) return
+
   let bassnote = chords[currentChord][0]
   bassSynth.triggerAttackRelease(Tone.Frequency(bassnote).transpose(-12*3), 0.2, undefined, 0.4);
   synth.triggerAttackRelease(Tone.Frequency(bassnote).transpose(+12*2), "16n", undefined, 1);
@@ -158,6 +166,8 @@ let down = () => {
 }
 
 let negative = () => {
+  if (!enableInterfaceSounds) return
+
   let bassnote = chords[currentChord][0]
   bassSynth.triggerAttackRelease(Tone.Frequency(bassnote).transpose((-12*3)+5), 0.2, undefined, 0.3);
   synth.triggerAttackRelease(Tone.Frequency(bassnote).transpose((+12*2)+5), "16n", undefined, 0.9);
@@ -169,6 +179,8 @@ let negative = () => {
 }
 
 let positive = () => {
+  if (!enableInterfaceSounds) return
+
   let bassnote = chords[currentChord][0]
   bassSynth.triggerAttackRelease(Tone.Frequency(bassnote).transpose(-12*3), 0.2, undefined, 0.4);
   synth.triggerAttackRelease(Tone.Frequency(bassnote).transpose(+12*2), "16n", undefined, 1);
@@ -185,6 +197,8 @@ let positive = () => {
 }
 
 let error = () => {
+  if (!enableInterfaceSounds) return
+
   let bassnote = chords[currentChord][0]
     bassSynth.triggerAttackRelease(Tone.Frequency(bassnote).transpose((-12*2)), 0.1, undefined, 0.3);
     errorSynth.triggerAttackRelease(Tone.Frequency(bassnote).transpose((-12*2)), "64n", undefined, 0.3);

@@ -8,6 +8,7 @@ const prefFile = path.join(app.getPath('userData'), 'pref.json')
 
 const defaultPrefs = {
   version: pkg.version,
+  enableInterfaceSounds: true
 }
 
 let prefs

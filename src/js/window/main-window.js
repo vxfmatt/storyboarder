@@ -451,11 +451,12 @@ let loadBoardUI = ()=> {
 
 
 
-  sketchPane.on('drawing:start', Sonifier.start)
-  sketchPane.on('drawing', Sonifier.trigger)
-  sketchPane.on('drawing:stop', Sonifier.stop)
-  Sonifier.init()
-
+  if (remote.getGlobal('sharedObj').prefs['enableInterfaceSounds']) {
+    sketchPane.on('drawing:start', Sonifier.start)
+    sketchPane.on('drawing', Sonifier.trigger)
+    sketchPane.on('drawing:stop', Sonifier.stop)
+    Sonifier.init()
+  }
 
 
   let onUndoStackAction = (state) => {
