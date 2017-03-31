@@ -81,6 +81,8 @@ let shuffle = (arr) => {
 
 let compareNumbers = (a, b) => a - b
 
+const sample = list => list[(Math.random() * list.length)|0]
+
 module.exports = {
   msToTime,
   uidGen,
@@ -93,5 +95,6 @@ module.exports = {
   swap,
   acceleratorAsHtml,
   shuffle,
-  compareNumbers
+  compareNumbers,
+  sample
 }
