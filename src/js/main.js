@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
-const prefModule = require('./prefs')
+const Prefs = require('./prefs')
 
 const fountain = require('./vendor/fountain')
 const fountainDataParser = require('./fountain-data-parser')
@@ -23,7 +23,7 @@ let powerSaveId = 0
 
 let previousScript
 
-let prefs = prefModule.getPrefs()
+let prefs = Prefs.getPrefs()
 
 let currentFile
 let currentPath
@@ -68,7 +68,7 @@ let openWelcomeWindow = ()=> {
   // RESET PREFS - SHOULD BE COMMENTED OUT
   // console.log(prefs)
   // prefs = {scriptFile: `./outl3ine.txt`}
-  // prefModule.savePrefs(prefs)
+  // Prefs.savePrefs(prefs)
   welcomeWindow = new BrowserWindow({width: 900, height: 600, center: true, show: false, resizable: false, frame: false})
   welcomeWindow.loadURL(`file://${__dirname}/../welcome.html`)
 
@@ -377,7 +377,7 @@ let addToRecentDocs = (filename, metadata) => {
   recentDocument.time = Date.now()
   prefs.recentDocuments.unshift(recentDocument)
   // save
-  prefModule.savePrefs(prefs)
+  Prefs.savePrefs(prefs)
   global.sharedObj.prefs = prefs
 }
 
