@@ -286,7 +286,7 @@ let drawBrush = (lastBit)=> {
       let b = (pointArray[pointArray.length-1].point)
       let dist = Math.floor(Math.sqrt(Math.pow(a[0]-b[0],2)+Math.pow(a[1]-b[1],2)))
       if (dist > 20) {
-        cursorLoc = [Math.floor(b[0]-a[0]), Math.floor(b[1]-a[1])]
+        let cursorLoc = [Math.floor(b[0]-a[0]), Math.floor(b[1]-a[1])]
         if (Math.abs(cursorLoc[0]) > Math.abs(cursorLoc[1])) {
           straightDirection = 1
           straightAnchor = a[1]
