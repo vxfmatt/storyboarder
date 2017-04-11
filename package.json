@@ -24,7 +24,7 @@
   "build": {
     "asar": true,
     "appId": "com.wonderunit.storyboarder",
-    "compression": "maximum", 
+    "compression": "maximum",
     "files": [
       "**/*",
       "!*.md",
@@ -56,6 +56,7 @@
   "dependencies": {
     "cardinal-spline-js": "^2.3.6",
     "color-js": "^1.0.3",
+    "eases": "1.0.8",
     "electron-is-dev": "0.1.2",
     "electron-localshortcut": "^1.0.0",
     "lodash.throttle": "4.1.1",
