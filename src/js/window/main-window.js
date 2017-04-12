@@ -6,7 +6,6 @@ const path = require('path')
 const moment = require('moment')
 const menu = require('../menu.js')
 const util = require('../utils/index.js')
-const sfx = require('../wonderunit-sound.js')
 const Color = require('color-js')
 
 const StoryboarderSketchPane = require('../storyboarder-sketch-pane.js')
