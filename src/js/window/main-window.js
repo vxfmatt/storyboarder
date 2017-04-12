@@ -339,6 +339,7 @@ let loadBoardUI = ()=> {
   })
   toolbar.on('fill', color => {
     storyboarderSketchPane.fillLayer(color.toCSS())
+    Sonifier.playEffect('fill')
   })
 
 
