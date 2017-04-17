@@ -60,7 +60,6 @@
     "electron-is-dev": "0.1.2",
     "electron-localshortcut": "^1.0.0",
     "gl-vec2": "^1.0.0",
-    "lodash.throttle": "4.1.1",
     "moment": "^2.14.1",
     "tether": "1.4.0",
     "tether-tooltip": "1.2.0",
