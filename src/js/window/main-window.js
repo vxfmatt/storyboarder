@@ -1570,7 +1570,7 @@ let stopPlaying = () => {
   utter.onend = null
   ipcRenderer.send('resumeSleep')
   speechSynthesis.cancel()
-  transport.setState({ playbackMode })
+  if (transport) transport.setState({ playbackMode })
 }
 
 let togglePlayback = ()=> {
