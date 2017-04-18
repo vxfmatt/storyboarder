@@ -185,6 +185,7 @@ let loadBoardUI = ()=> {
       switch (e.target.name) {
         case 'newShot':
           boardData.boards[currentBoard].newShot = e.target.checked
+          sfx.playEffect(e.target.checked ? 'on' : 'off')
           markBoardFileDirty()
           textInputMode = false
           break
